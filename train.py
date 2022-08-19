@@ -82,7 +82,7 @@ trainer.save_model()
 trainer.evaluate(eval_dataset=eval_dataset)
 
 # load unlabeled data
-unlabeled_data = pandas.read_csv("data/test.csv")[['index', 'text', 'label_text']].set_index('index').sort_index()
+unlabeled_data = pandas.read_csv("data/test.csv")[['index', 'text', 'tweet_id']].set_index('index').sort_index()
 
 # tokenize data
 encoding = tokenizer(unlabeled_data['text'].to_list(), return_tensors='pt', padding=True, truncation=True, max_length=128)
