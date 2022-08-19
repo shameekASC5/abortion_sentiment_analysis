@@ -32,7 +32,7 @@ model.train()  # tell model to enter "train" mode
 optimizer = torch.optim.AdamW(model.parameters(), lr=0.01)
 
 # load labeled data
-labeled_data = pandas.read_csv("data/2022-05-18-climate-change-labeled-samples.csv")[['index', 'text', 'label_text']].set_index('index').sort_index()
+labeled_data = pandas.read_csv("data/2022-07-08-abortion-labeled-samples.csv")[['index', 'text', 'label_text']].set_index('index').sort_index()
 # remove irrelevant label
 labeled_data = labeled_data.loc['irrelevant or no opinion on climate change' != labeled_data['label_text']]
 labeled_data = labeled_data.loc['review with JunMing' != labeled_data['label_text']]
@@ -41,11 +41,11 @@ labeled_data = labeled_data.loc['review with JunMing' != labeled_data['label_tex
 print(labeled_data['label_text'].unique())
 assert 5 == len(labeled_data['label_text'].unique())
 labeled_data['labels'] = labeled_data['label_text'].map({
-    'Strongly agree with climate change': 0,
-    'Slightly agree with climate change': 1,
-    'Neutral to climate change': 2,
-    'Slightly disagree with climate change': 3,
-    'Strongly disagree with climate change': 4
+    "Strongly believe abortion should be legal": 0, 
+    "Slightly believe abortion should be legal": 1, 
+    "Neutral to abortion rights/restrictions": 2, 
+    "Slightly believe abortion should be illegal": 3, 
+    "Strongly believe abortion should be illegal": 4
 }).to_list()
 
 # prepare data in tokens
